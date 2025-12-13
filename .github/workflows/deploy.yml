@@ -44,7 +44,6 @@ jobs:
         run: npm run build
         env:
           VITE_SERVER_IP: ${{ secrets.VITE_SERVER_IP }}
-          VITE_SERVER_PORT: ${{ secrets.VITE_SERVER_PORT }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

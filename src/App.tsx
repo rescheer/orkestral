@@ -1,17 +1,13 @@
 import { useEffect, useState, useRef } from 'react';
 import './App.css';
 
-const server = {
-  ip: import.meta.env.VITE_SERVER_IP,
-  port: import.meta.env.VITE_SERVER_PORT,
-};
-
-const testUrl = `wss://${server.ip}:${server.port}`;
+const serverIp: string = import.meta.env.VITE_SERVER_IP;
 
 function App() {
   const [connectionStatus, setConnectionStatus] = useState<
     'connected' | 'disconnected' | 'error'
   >('disconnected');
+  const [message, setMessage] = useState<string>('');
 
   const socket = useRef<WebSocket | null>(null);
 
@@ -19,8 +15,12 @@ function App() {
     socket.current?.send('Hi!');
   };
 
+  const handleClear = () => {
+    setMessage('');
+  }
+
   useEffect(() => {
-    socket.current = new WebSocket(testUrl);
+    socket.current = new WebSocket(serverIp);
     const socketCurrent = socket.current;
 
     socketCurrent.onopen = () => {
@@ -38,13 +38,20 @@ function App() {
       setConnectionStatus('error');
     };
 
+    socketCurrent.onmessage = (msgEvent: MessageEvent) => {
+      const data = msgEvent.data as string;
+      setMessage(data);
+    };
+
     return () => socketCurrent.close();
   }, []);
 
   return (
     <>
-      <h1>Connection status: {connectionStatus}</h1>
+      <h2>Connection status: {connectionStatus}</h2>
       <button onClick={handleClick}>Say Hi</button>
+      <button onClick={handleClear}>Clear Message</button>
+      <div>{message}</div>
     </>
   );
 }
