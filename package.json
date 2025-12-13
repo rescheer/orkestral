@@ -1,8 +1,20 @@
 {
   "name": "orkestral",
+  "version": "1.0.0",
   "private": true,
-  "version": "0.0.0",
+  "description": "A tool for creating device-based collective performances",
+  "homepage": "https://github.com/rescheer/orkestral#readme",
+  "bugs": {
+    "url": "https://github.com/rescheer/orkestral/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rescheer/orkestral.git"
+  },
+  "license": "GPL-3.0-only",
+  "author": "Robby Scheer",
   "type": "module",
+  "main": "index.html",
   "scripts": {
     "dev": "vite --host",
     "build": "tsc -b && vite build",
