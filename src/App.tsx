@@ -6,7 +6,7 @@ const server = {
   port: import.meta.env.VITE_SERVER_PORT,
 };
 
-const testUrl = `ws://${server.ip}:${server.port}`;
+const testUrl = `wss://${server.ip}:${server.port}`;
 
 function App() {
   const [connectionStatus, setConnectionStatus] = useState<
