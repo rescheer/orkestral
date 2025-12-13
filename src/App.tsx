@@ -51,7 +51,7 @@ function App() {
       <h2>Connection status: {connectionStatus}</h2>
       <button onClick={handleClick}>Say Hi</button>
       <button onClick={handleClear}>Clear Message</button>
-      <div>{message}</div>
+      <div>server response: {message}</div>
     </>
   );
 }
