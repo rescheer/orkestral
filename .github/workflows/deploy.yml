@@ -38,12 +38,14 @@ jobs:
         with:
           node-version: lts/*
           cache: 'npm'
-          cache-dependency-path: 'apps/client/package-lock.json'
+          cache-dependency-path: 'package-lock.json'
 
-      - name: Install dependencies and build
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build client
         run: |
           cd apps/client/
-          npm ci
           npm run build
         env:
           VITE_SERVER_IP: ${{ secrets.VITE_SERVER_IP }}
