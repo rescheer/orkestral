@@ -1,0 +1,33 @@
+{
+  "name": "orkestral-server",
+  "version": "1.0.0",
+  "description": "Server files for rescheer/orkestral",
+  "homepage": "https://github.com/rescheer/orkestral-server#readme",
+  "bugs": {
+    "url": "https://github.com/rescheer/orkestral-server/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rescheer/orkestral-server.git"
+  },
+  "license": "GPL-3.0-only",
+  "author": "Robby Scheer",
+  "type": "module",
+  "main": "server.ts",
+  "scripts": {
+    "start": "node dist/server.js",
+    "build": "tsc -b",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "ws": "^8.18.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "@types/ws": "^8.18.1",
+    "eslint": "^9.39.2",
+    "globals": "^16.5.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.49.0"
+  }
+}
