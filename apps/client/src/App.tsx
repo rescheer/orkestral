@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import './App.css';
+import type { NotifyMessage } from '@orkestral/shared';
 
 const serverIp: string = import.meta.env.VITE_SERVER_IP;
 
@@ -12,12 +13,22 @@ function App() {
   const socket = useRef<WebSocket | null>(null);
 
   const handleClick = () => {
-    socket.current?.send('Hi!');
+    const msg: NotifyMessage = {
+      type: 'NOTIFY',
+      level: 'INFO',
+      payload: 'Click',
+      sentAt: new Date(),
+      recievedAt: null,
+      source: null,
+      target: null
+    };
+
+    socket.current?.send(JSON.stringify(msg));
   };
 
   const handleClear = () => {
     setMessage('');
-  }
+  };
 
   useEffect(() => {
     socket.current = new WebSocket(serverIp);

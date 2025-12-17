@@ -5,7 +5,7 @@ import {
   QueryMessage,
   ResponseMessage,
   SocketMessage,
-} from './types';
+} from '@orkestral/shared';
 
 function parseMessage(msgString: string): SocketMessage {
   return JSON.parse(msgString);

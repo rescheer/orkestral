@@ -1,4 +1,5 @@
 import { WebSocket, WebSocketServer } from 'ws';
+import messageHandler from './messageHandler';
 
 // Constants
 const HEARTBEAT_INTERVAL = 10 * 1000;
@@ -21,12 +22,14 @@ server.on('connection', (socket: WebSocket, req) => {
   console.log(`New client connected. Total clients: ${server.clients.size}`);
 
   // Message Handling
-  socket.on('message', (msg: String) => {
+  socket.on('message', (msg: string) => {
     const ip = req.socket.remoteAddress;
-    console.log(`Incoming message from client at ${ip}: ${msg}`);
+
+    messageHandler(server, msg);
+    // console.log(`Incoming message from client at ${ip}: ${msg}`);
     server.clients.forEach((client) => {
       if (client.readyState === WebSocket.OPEN) {
-        client.send('yo');
+        client.send(JSON.stringify(server.clients));
       }
     });
   });
@@ -54,5 +57,5 @@ const interval = setInterval(function ping() {
     extendedSocket.isAlive = false;
     socket.ping();
   });
-  console.log(`Heartbeat. Connected clients: ${server.clients.size}`);
+  // console.log(`Heartbeat. Connected clients: ${server.clients.size}`);
 }, HEARTBEAT_INTERVAL);

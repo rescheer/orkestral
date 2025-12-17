@@ -7,28 +7,28 @@ interface GenericMessage {
 
 export type LogLevel = 'TRACE' | 'INFO' | 'WARN' | 'ERROR';
 
-export type NotifyMessage = GenericMessage & {
+export interface NotifyMessage extends GenericMessage {
   type: 'NOTIFY';
   level: LogLevel;
   payload: string;
-};
+}
 
-export type QueryMessage = GenericMessage & {
+export interface QueryMessage extends GenericMessage {
   type: 'QUERY';
   requests: string[];
-};
+}
 
-export type CommandMessage = GenericMessage & {
+export interface CommandMessage extends GenericMessage {
   type: 'COMMAND';
   request: string;
   params?: any[];
-};
+}
 
-export type ResponseMessage = GenericMessage & {
+export interface ResponseMessage extends GenericMessage {
   type: 'RESPONSE';
   initiator: SocketMessage;
   payload: any[];
-};
+}
 
 export type SocketMessage =
   | NotifyMessage

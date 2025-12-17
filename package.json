@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "A tool for creating device-based collective performances",
   "workspaces": [
-    "apps/*"
+    "apps/*",
+    "packages/*"
   ],
   "scripts": {
     "build:server": "cd apps/server && npm run build",
@@ -27,7 +28,6 @@
   "homepage": "https://github.com/rescheer/orkestral#readme",
   "devDependencies": {
     "concurrently": "^9.2.1",
-    "nodemon": "^3.1.11",
-    "ts-node": "^10.9.2"
+    "tsx": "^4.21.0"
   }
 }

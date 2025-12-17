@@ -13,6 +13,7 @@
     "lib": ["ES2020"], // Specify library files to be included in the compilation (exclude "DOM" for backend)
     "moduleResolution": "node" // Use Node.js module resolution strategy
   },
-  "include": ["src/**/*"], // Include all files within the 'src' directory
-  "exclude": ["node_modules"] // Exclude the node_modules directory from compilation
+  "include": ["src/**/*", "../../packages/shared/src/types.ts"], // Include all files within the 'src' directory
+  "exclude": ["node_modules"], // Exclude the node_modules directory from compilation
+  "references": [{ "path": "../../packages/shared" }]
 }
