@@ -1,58 +1,21 @@
-import { useEffect, useState, useRef } from 'react';
+import { WebSocketProvider } from './providers/WebSocketProvider';
+
 import './App.css';
+import Spoke from './components/Spoke';
+import Hub from './components/Hub';
 
 const serverIp: string = import.meta.env.VITE_SERVER_IP;
+const searchParams = new URLSearchParams(window.location.search);
+const isHub: boolean = searchParams.has('hub');
 
 function App() {
-  const [connectionStatus, setConnectionStatus] = useState<
-    'connected' | 'disconnected' | 'error'
-  >('disconnected');
-  const [message, setMessage] = useState<string>('');
 
-  const socket = useRef<WebSocket | null>(null);
-
-  const handleClick = () => {
-    socket.current?.send('Hi!');
-  };
-
-  const handleClear = () => {
-    setMessage('');
-  }
-
-  useEffect(() => {
-    socket.current = new WebSocket(serverIp);
-    const socketCurrent = socket.current;
-
-    socketCurrent.onopen = () => {
-      console.log('Server connection successful!');
-      setConnectionStatus('connected');
-    };
-
-    socketCurrent.onclose = () => {
-      console.log('Server connection closed.');
-      setConnectionStatus('disconnected');
-    };
-
-    socketCurrent.onerror = (event: Event) => {
-      console.error('Socket error: ', event);
-      setConnectionStatus('error');
-    };
-
-    socketCurrent.onmessage = (msgEvent: MessageEvent) => {
-      const data = msgEvent.data as string;
-      setMessage(data);
-    };
-
-    return () => socketCurrent.close();
-  }, []);
+  const content = isHub ? <Hub /> : <Spoke />;
 
   return (
-    <>
-      <h2>Connection status: {connectionStatus}</h2>
-      <button onClick={handleClick}>Say Hi</button>
-      <button onClick={handleClear}>Clear Message</button>
-      <div>server response: {message}</div>
-    </>
+    <WebSocketProvider url={serverIp}>
+      {content}
+    </WebSocketProvider>
   );
 }
 

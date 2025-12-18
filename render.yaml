@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: orkestral-server
+    env: node
+    plan: free # or 'starter'
+    region: ohio # choose your preferred region
+    
+    # Crucial for monorepos: build from the root to access @orkestral/shared
+    rootDir: .
+
+    # 1. Install all dependencies
+    # 2. Use 'tsc -b' to compile the shared package and then the server
+    buildCommand: npm install && npx tsc -b
+
+    # Run the compiled server entry point
+    startCommand: node apps/server/dist/server.js
+
+    # Only trigger a build if code in these folders changes
+    buildFilter:
+      paths:
+        - apps/server/**
+        - packages/shared/**
+
+    envVars:
+      - key: NODE_VERSION
+        value: 20 # Or your preferred version
+      - key: PORT
+        value: 10000
