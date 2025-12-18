@@ -1,5 +1,5 @@
 import { WebSocket, WebSocketServer } from 'ws';
-import messageHandler from './messageHandler';
+import messageHandler from './messageHandler.js';
 
 // Constants
 const HEARTBEAT_INTERVAL = 10 * 1000;
