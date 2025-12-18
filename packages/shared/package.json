@@ -1,6 +1,12 @@
 {
   "name": "@orkestral/shared",
   "version": "1.0.0",
-  "main": "src/types.ts",
-  "types": "src/types.ts"
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  }
 }

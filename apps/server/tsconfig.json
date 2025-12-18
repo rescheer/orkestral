@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "composite": true,
+    "baseUrl": ".",
     "target": "ES2020", // Specifies the target JavaScript version for emitted code (adjust based on Node version)
     "module": "es2020", // Specifies the module system for the generated JavaScript
     "outDir": "./dist", // Redirect output structure to the directory 'dist'
@@ -11,7 +13,8 @@
     "resolveJsonModule": true, // Include modules imported with ".json" extension
     "sourceMap": true, // Generates corresponding ".map" file
     "lib": ["ES2020"], // Specify library files to be included in the compilation (exclude "DOM" for backend)
-    "moduleResolution": "node" // Use Node.js module resolution strategy
+    "moduleResolution": "node", // Use Node.js module resolution strategy
+    "paths": { "@orkestral/shared": ["../../packages/shared/src/index.ts"] }
   },
   "include": ["src/**/*", "../../packages/shared/src/types.ts"], // Include all files within the 'src' directory
   "exclude": ["node_modules"], // Exclude the node_modules directory from compilation

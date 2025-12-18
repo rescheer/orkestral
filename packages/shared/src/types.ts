@@ -26,7 +26,7 @@ export interface CommandMessage extends GenericMessage {
 
 export interface ResponseMessage extends GenericMessage {
   type: 'RESPONSE';
-  initiator: SocketMessage;
+  initiator: QueryMessage | CommandMessage;
   payload: any[];
 }
 
